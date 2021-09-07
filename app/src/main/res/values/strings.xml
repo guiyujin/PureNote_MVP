@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MVPNote</string>
+    <string name="add_content">添加笔记</string>
+    <string name="action_settings">设置</string>
+    <string name="action_about">关于</string>
+    <string name="action_delete">删除</string>
+    <string name="action_share">分享</string>
+    <string name="action_add_alarm">提醒我</string>
+    <string name="action_text_size">文字大小</string>
+    <string name="action_box">更改分组</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="night_mode">夜间模式</string>
+    <string name="pref_night_summary">开/关夜间模式</string>
+</resources>
