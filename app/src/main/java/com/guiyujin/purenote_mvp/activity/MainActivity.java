@@ -13,13 +13,20 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guiyujin.purenote_mvp.MyAdapter;
 import com.guiyujin.purenote_mvp.R;
+import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
 import com.guiyujin.purenote_mvp.base.BaseModel;
 import com.guiyujin.purenote_mvp.base.BasePresenter;
 import com.guiyujin.purenote_mvp.base.BaseView;
+import com.guiyujin.purenote_mvp.model.main.MainModelConstract;
+import com.guiyujin.purenote_mvp.model.main.MainModelImpl;
+import com.guiyujin.purenote_mvp.model.main.MainPresenter;
 import com.guiyujin.purenote_mvp.room.DBengine;
+import com.guiyujin.purenote_mvp.room.Note;
 
-public class MainActivity extends BaseActivity<BasePresenter, BaseModel>implements BaseView {
+import java.util.List;
+
+public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>implements MainModelConstract.View {
     private MyAdapter myAdapter;
     private DBengine dBengine;
     private FloatingActionButton fab;
@@ -35,13 +42,13 @@ public class MainActivity extends BaseActivity<BasePresenter, BaseModel>implemen
     }
 
     @Override
-    protected BasePresenter initPresenter() {
-        return new BasePresenter();
+    protected MainPresenter initPresenter() {
+        return new MainPresenter();
     }
 
     @Override
-    protected BaseModel initModel() {
-        return null;
+    protected MainModelImpl initModel() {
+        return new MainModelImpl();
     }
 
     @Override
@@ -81,8 +88,20 @@ public class MainActivity extends BaseActivity<BasePresenter, BaseModel>implemen
             Bundle bundle = new Bundle();
             bundle.putString("content", dBengine.getAllNotes().get(position).getContent());
             bundle.putInt("_id", dBengine.getAllNotes().get(position).getId());
-
             startActivity(DetailActivity.class, bundle);
+        });
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                presenter.search(dBengine.getAllNotes(), newText,MainActivity.this);
+                return false;
+            }
         });
     }
 
@@ -147,4 +166,17 @@ public class MainActivity extends BaseActivity<BasePresenter, BaseModel>implemen
     public void checkPermission() {
 
     }
+
+    @Override
+    public void onSearchSuccess(List<Note> note) {
+        myAdapter.setAllNotes(note);
+        recyclerView.setAdapter(myAdapter);
+    }
+
+
+    @Override
+    public void onFailed() {
+
+    }
+
 }

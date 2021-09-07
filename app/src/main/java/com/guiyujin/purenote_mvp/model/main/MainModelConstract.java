@@ -9,6 +9,8 @@ import com.guiyujin.purenote_mvp.callback.ICallBack;
 import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
 import com.guiyujin.purenote_mvp.room.Note;
 
+import java.util.List;
+
 /**
  * @ProjectName: PureNote_MVP
  * @Package: com.guiyujin.purenote_mvp.model.main
@@ -23,18 +25,17 @@ import com.guiyujin.purenote_mvp.room.Note;
  */
 public interface MainModelConstract {
     interface Model extends BaseModel {
-        void search(Note note, Context context, ICallBack iCallBack);
+        void search(List<Note> note, String text, Context context, ICallBack iCallBack);
         void delete(Note note, Context context);
     }
 
     interface View extends BaseView {
-        void onSuccess();
+        void onSearchSuccess(List<Note> note);
         void onFailed();
-        void clear();
     }
 
     interface presenter extends IPresenter<MainModelConstract.View, MainModelConstract.Model> {
-        void search(Note note, Context context);
+        void search(List<Note> note, String text, Context context);
         void delete(Note note, Context context);
         void clear();
     }

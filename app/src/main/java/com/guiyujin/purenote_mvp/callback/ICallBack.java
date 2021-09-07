@@ -2,6 +2,10 @@ package com.guiyujin.purenote_mvp.callback;
 
 import android.content.Intent;
 
+import com.guiyujin.purenote_mvp.room.Note;
+
+import java.util.List;
+
 /**
  * @ProjectName: PureNote_MVP
  * @Package: com.guiyujin.purenote_mvp.callback
@@ -19,4 +23,5 @@ public interface ICallBack {
     void onFailed();
 
     void onSuccess(Intent intent);
+    void onSuccess(List<Note> noteList);
 }

@@ -7,6 +7,8 @@ import com.guiyujin.purenote_mvp.base.BasePresenter;
 import com.guiyujin.purenote_mvp.callback.ICallBack;
 import com.guiyujin.purenote_mvp.room.Note;
 
+import java.util.List;
+
 /**
  * @ProjectName: PureNote_MVP
  * @Package: com.guiyujin.purenote_mvp.model.detail
@@ -48,6 +50,11 @@ public class DetailPresenter extends BasePresenter<DetailConstract.View, DetailC
             @Override
             public void onSuccess(Intent intent) {
                 mView.share(intent);
+            }
+
+            @Override
+            public void onSuccess(List<Note> noteList) {
+
             }
         });
     }
