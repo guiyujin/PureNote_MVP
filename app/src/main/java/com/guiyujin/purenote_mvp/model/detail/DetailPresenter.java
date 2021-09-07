@@ -5,7 +5,6 @@ import android.content.Intent;
 
 import com.guiyujin.purenote_mvp.base.BasePresenter;
 import com.guiyujin.purenote_mvp.callback.ICallBack;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
 import com.guiyujin.purenote_mvp.room.Note;
 
 /**
@@ -53,6 +52,7 @@ public class DetailPresenter extends BasePresenter<DetailConstract.View, DetailC
         });
     }
 
+    @SuppressWarnings({"unchecked"})
     @Override
     public void addAlarm(Context context, Note note) {
         mModel.addAlarm(context, note);
