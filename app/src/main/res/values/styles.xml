@@ -18,6 +18,12 @@
         <item name="actionOverflowMenuStyle">@style/MainOverflowMenuStyle</item>
     </style>
 
+    <style name="AppTheme.Launch" parent="AppTheme.Main.NoActionBar">
+        <item name="android:windowBackground">@drawable/launcher_layout</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="MainOverflowButtonStyle" >
         <item name="android:src">@drawable/ic_more</item> //设置overflow图标
         <item name="android:paddingEnd">20dp</item>  //overflow图标右边距

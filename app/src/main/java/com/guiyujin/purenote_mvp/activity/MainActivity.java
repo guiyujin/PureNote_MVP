@@ -110,39 +110,8 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
         super.onStart();
         myAdapter.setAllNotes(dBengine.getAllNotes());
         recyclerView.setAdapter(myAdapter);
-//        Log.i("ONRESULTSSSS", "ONSTART " + myAdapter.getItemCount());
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-//        Log.i("ONRESULTSSSS", "ONRESTART " + myAdapter.getItemCount());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        Log.i("ONRESULTSSSS", "ONRESUME " + myAdapter.getItemCount());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        Log.i("ONRESULTSSSS", "ONPAUSE " + myAdapter.getItemCount());
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        Log.i("ONRESULTSSSS", "ONSTOP " + myAdapter.getItemCount());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        Log.i("ONRESULTSSSS", "ONDESTORY " + myAdapter.getItemCount());
-    }
 
     @Override
     public void widgetClick(int id) {

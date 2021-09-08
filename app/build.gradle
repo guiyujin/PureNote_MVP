@@ -1,17 +1,23 @@
-plugins {
-    id 'com.android.application'
+if ( rootProject.ext.android.is_app){
+    apply plugin: 'com.android.application'
+}else {
+    apply plugin: 'com.android.library'
 }
 
+
+
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.guiyujin.purenote_mvp"
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        if ( rootProject.ext.android.is_app){
+            applicationId "com.guiyujin.purenote_mvp"
+        }
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,6 +32,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.android.is_app) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.srcDirs 'src/main/model'
+            } else {
+                manifest.srcFile 'src/main/mainfest/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -34,9 +51,10 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+
+    api rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.material
+    api rootProject.ext.dependencies.constraintlayout
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
