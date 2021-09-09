@@ -21,6 +21,9 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#99999999</color>
 
+    <color name="checked">#E6F2FF</color>
+    <color name="Primary">#FFFFFF</color>
+
     <color name="MicolorPrimary">#F7F7F7</color>
     <color name="MicolorPrimaryDark">#F7F7F7</color>
     <color name="Misearch">#969696</color>

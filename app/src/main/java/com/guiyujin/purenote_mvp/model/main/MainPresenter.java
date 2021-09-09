@@ -52,7 +52,7 @@ public class MainPresenter  extends BasePresenter<MainModelConstract.View, MainM
     @Override
     public void delete(Note note, Context context) {
         mModel.delete(note, context);
-
+        mView.onDelete();
     }
 
     @Override

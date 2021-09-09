@@ -5,19 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guiyujin.purenote_mvp.MyAdapter;
+import com.guiyujin.purenote_mvp.OperationDialog;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
-import com.guiyujin.purenote_mvp.base.BaseModel;
-import com.guiyujin.purenote_mvp.base.BasePresenter;
-import com.guiyujin.purenote_mvp.base.BaseView;
 import com.guiyujin.purenote_mvp.model.main.MainModelConstract;
 import com.guiyujin.purenote_mvp.model.main.MainModelImpl;
 import com.guiyujin.purenote_mvp.model.main.MainPresenter;
@@ -77,6 +75,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
         dBengine = new DBengine(this);
         myAdapter = new MyAdapter();
 
+
         recyclerView = find(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -88,10 +87,26 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
     public void initListener() {
         fab.setOnClickListener(this);
         myAdapter.setOnItemClickListener((v, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("content", dBengine.getAllNotes().get(position).getContent());
-            bundle.putInt("_id", dBengine.getAllNotes().get(position).getId());
-            startActivity(DetailActivity.class, bundle);
+            edit(position);
+        });
+
+        myAdapter.setOnItemLongClickListener((v, position) -> {
+            OperationDialog operationDialog = new OperationDialog(this);
+            operationDialog.showDialog(R.layout.operation_dialog, Gravity.CENTER);
+            operationDialog.setOperationDialogListener(new OperationDialog.OperationDialogListener() {
+                @Override
+                public void edit() {
+                    MainActivity.this.edit(position);
+                }
+
+                @Override
+                public void delete() {
+                    Note note = new Note(dBengine.getAllNotes().get(position).getContent(), Util.getTime());
+                    note.setId(dBengine.getAllNotes().get(position).getId());
+                    presenter.delete(note,MainActivity.this);
+
+                }
+            });
         });
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -112,6 +127,13 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 //            isSearch = false;
 //            return false;
 //        });
+    }
+
+    private void edit(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString("content", dBengine.getAllNotes().get(position).getContent());
+        bundle.putInt("_id", dBengine.getAllNotes().get(position).getId());
+        startActivity(DetailActivity.class, bundle);
     }
 
     @Override
@@ -158,10 +180,15 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
         recyclerView.setAdapter(myAdapter);
     }
 
+    @Override
+    public void onDelete() {
+        myAdapter.setAllNotes(dBengine.getAllNotes());
+        recyclerView.setAdapter(myAdapter);
+    }
+
 
     @Override
     public void onFailed() {
-
     }
 
 }

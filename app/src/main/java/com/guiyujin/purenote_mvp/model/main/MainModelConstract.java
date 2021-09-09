@@ -31,6 +31,7 @@ public interface MainModelConstract {
 
     interface View extends BaseView {
         void onSearchSuccess(List<Note> note);
+        void onDelete();
         void onFailed();
     }
 

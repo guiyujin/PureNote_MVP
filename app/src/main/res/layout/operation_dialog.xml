@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/action_edit"
+            android:layout_marginTop="40dp"
+            android:button="@null"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:background="@drawable/radiogroup"
+            android:text="编辑"
+            style="@style/RadioButtonStyle"/>
+
+        <RadioButton
+            android:id="@+id/action_delete"
+            android:button="@null"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:background="@drawable/radiogroup"
+            android:text="删除"
+            style="@style/RadioButtonStyle"/>
+
+    </RadioGroup>
+
+</LinearLayout>

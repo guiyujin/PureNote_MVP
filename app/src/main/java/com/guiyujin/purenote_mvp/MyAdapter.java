@@ -3,6 +3,7 @@ package com.guiyujin.purenote_mvp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,15 +20,17 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<Note> allNotes = new ArrayList<>();
 
-    public MyAdapter.onItemClickListener getOnItemClickListener() {
-        return onItemClickListener;
-    }
-
     public void setOnItemClickListener(MyAdapter.onItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     private onItemClickListener onItemClickListener;
+
+    public void setOnItemLongClickListener(MyAdapter.onItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
+    private onItemLongClickListener onItemLongClickListener;
 
     public void setAllNotes(List<Note> allNotes) {
         this.allNotes = allNotes;
@@ -56,6 +59,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 }
             });
         }
+        if (onItemLongClickListener != null){
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = holder.getLayoutPosition();
+                    onItemLongClickListener.onLongClick(holder.itemView, position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -78,5 +91,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         void onClick(View v, int position);
     }
 
-
+    public interface onItemLongClickListener{
+        void onLongClick(View v, int position);
+    }
 }
