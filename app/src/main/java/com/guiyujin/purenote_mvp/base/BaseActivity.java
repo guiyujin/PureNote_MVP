@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.guiyujin.purenote_mvp.R;
 
 import java.lang.reflect.Method;
 
@@ -304,6 +307,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(menu_res, menu);
+
         return true;
     }
 

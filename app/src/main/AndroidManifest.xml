@@ -5,9 +5,9 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/purenote"
+        android:icon="@drawable/purenote"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/purenote"
+        android:roundIcon="@drawable/purenote"
         android:supportsRtl="true"
         >
         <activity

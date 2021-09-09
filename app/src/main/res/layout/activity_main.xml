@@ -36,7 +36,7 @@
         app:rippleColor="@color/MicolorPrimary"
         app:borderWidth="0dp"
         android:focusable="true"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_add2"
         app:fabSize="normal">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>

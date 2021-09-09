@@ -1,11 +1,17 @@
 <?xml version="1.1" encoding="utf-8"?>
 <resources>
+    <style name="AppTheme.Launch" parent="AppTheme.Main.NoActionBar">
+        <item name="android:windowBackground">@drawable/launcher_layout</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.Main.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.Main" parent="Theme.AppCompat.DayNight">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/MicolorPrimary</item>
         <item name="colorPrimaryDark">@color/MicolorPrimaryDark</item>
@@ -13,20 +19,18 @@
         <item name="elevation">0dp</item>
         <item name="android:actionBarDivider">@null</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:textAppearanceLargePopupMenu">@style/popmeuText</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/popupmenuText</item>
+
+    </style>
+
+    <style name="AppTheme.Main" parent="AppTheme.Base">
         <item name="actionOverflowButtonStyle">@style/MainOverflowButtonStyle</item>
         <item name="actionOverflowMenuStyle">@style/MainOverflowMenuStyle</item>
     </style>
 
-    <style name="AppTheme.Launch" parent="AppTheme.Main.NoActionBar">
-        <item name="android:windowBackground">@drawable/launcher_layout</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
     <style name="MainOverflowButtonStyle" >
-        <item name="android:src">@drawable/ic_more</item> //设置overflow图标
-        <item name="android:paddingEnd">20dp</item>  //overflow图标右边距
+        <item name="android:src">@drawable/ic_more</item>
+        <item name="android:paddingEnd">15dp</item>  //overflow图标右边距
     </style>
 
     <style name="MainOverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
@@ -36,17 +40,24 @@
         <item name="android:dropDownHorizontalOffset">-15dp</item>  //右边距
     </style>
 
-    <style name="popmeuText">
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="AppTheme.Add" parent="AppTheme.Main">
+    <style name="AppTheme.Add" parent="AppTheme.Base">
         <item name="actionOverflowButtonStyle">@style/AddOverflowButtonStyle</item>
+        <item name="actionOverflowMenuStyle">@style/MainOverflowMenuStyle</item>
     </style>
 
     <style name="AddOverflowButtonStyle" >
-        <item name="android:src">@drawable/ic_box</item> //设置overflow图标
-        <item name="android:paddingEnd">10dp</item>  //overflow图标右边距
+        <item name="android:src">@drawable/ic_confirm</item> //设置overflow图标
+        <item name="android:paddingEnd">15dp</item>  //overflow图标右边距
+    </style>
+
+    <style name="AppTheme.Detail" parent="AppTheme.Base">
+        <item name="actionOverflowButtonStyle">@style/DetailOverflowButtonStyle</item>
+        <item name="actionOverflowMenuStyle">@style/MainOverflowMenuStyle</item>
+    </style>
+
+    <style name="DetailOverflowButtonStyle" >
+        <item name="android:src">@drawable/ic_more</item> //设置overflow图标
+        <item name="android:paddingEnd">15dp</item>  //overflow图标右边距
     </style>
 
     <style name="MainToolbarPopupTheme" parent="Widget.AppCompat.PopupMenu.Overflow">
@@ -57,6 +68,10 @@
         <item name="android:showDividers">middle</item>
         <item name="android:divider">@color/gray</item>
         <item name="android:dividerHeight">1px</item>
+    </style>
+
+    <style name="popupmenuText">
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -79,7 +79,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
 
     @Override
     public void initListener() {
-
+        showBack(R.drawable.ic_close);
     }
 
     @Override

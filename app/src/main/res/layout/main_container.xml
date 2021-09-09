@@ -17,7 +17,6 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/round_search"
         app:queryBackground="@null"
-
         android:iconifiedByDefault="false"
         android:queryHint="请输入搜索内容" >
         </androidx.appcompat.widget.SearchView>

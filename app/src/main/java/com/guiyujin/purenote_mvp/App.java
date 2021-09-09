@@ -1,6 +1,7 @@
 package com.guiyujin.purenote_mvp;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 /**
@@ -16,6 +17,11 @@ import android.util.Log;
  * @Version: 1.0
  */
 public class App extends Application {
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+    }
 
     @Override
     public void onCreate() {

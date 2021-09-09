@@ -32,11 +32,14 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private SearchView mSearchView;
+    private boolean isSearch = false;
+    private List<Note> note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        note = dBengine.getAllNotes();
         presenter.attach(this,model);
         Log.i("ONRESULTSSSS", "ONCREATE " + myAdapter.getItemCount());
     }
@@ -99,17 +102,29 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                isSearch = true;
                 presenter.search(dBengine.getAllNotes(), newText,MainActivity.this);
                 return false;
             }
         });
+
+//        mSearchView.setOnCloseListener( () -> {
+//            isSearch = false;
+//            return false;
+//        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        myAdapter.setAllNotes(dBengine.getAllNotes());
-        recyclerView.setAdapter(myAdapter);
+        if (!isSearch){
+            myAdapter.setAllNotes(dBengine.getAllNotes());
+            recyclerView.setAdapter(myAdapter);
+        }else {
+            myAdapter.setAllNotes(note);
+            recyclerView.setAdapter(myAdapter);
+        }
+
     }
 
 
@@ -138,6 +153,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
     @Override
     public void onSearchSuccess(List<Note> note) {
+        this.note = note;
         myAdapter.setAllNotes(note);
         recyclerView.setAdapter(myAdapter);
     }

@@ -49,11 +49,12 @@ public class SettingsActivity extends BaseActivity {
     @Override
     public void initView(View view) {
 
+        initToolBar(R.id.toolbar_settings, R.menu.menu_setting);
     }
 
     @Override
     public void initListener() {
-
+        showBack(R.drawable.ic_close);
     }
 
     @Override
