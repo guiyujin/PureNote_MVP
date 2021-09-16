@@ -3,16 +3,12 @@ package com.guiyujin.purenote_mvp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.guiyujin.purenote_mvp.room.Note;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
         Note note = allNotes.get(position);
-        holder.tv_content.setText(note.getContent());
+        holder.tv_title.setText(note.getTitle());
         holder.tv_time.setText(note.getTime());
 
         if (onItemClickListener != null){
@@ -78,11 +74,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv_content, tv_time;
+        private TextView tv_title, tv_time;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_content = itemView.findViewById(R.id.rv_content);
+            tv_title = itemView.findViewById(R.id.rv_title);
             tv_time = itemView.findViewById(R.id.rv_time);
         }
     }

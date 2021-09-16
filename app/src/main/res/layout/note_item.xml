@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/rv_content"
+                android:id="@+id/rv_title"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="4"

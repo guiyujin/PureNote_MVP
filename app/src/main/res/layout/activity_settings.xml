@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -22,50 +23,98 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="#FFFFFF"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_night_mode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:orientation="vertical">
+            android:layout_marginStart="15dp"
+            android:text="@string/night_mode"
+            android:textSize="25sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="@string/night_mode"
-                android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_night_mode"
+            android:text="@string/pref_night_summary"
+            android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="@string/pref_night_summary"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/nightMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
             android:layout_marginEnd="10dp"
-            android:gravity="center"
             android:switchMinWidth="40dp"
             android:thumb="@drawable/wechat_style_thumb"
-            android:track="@drawable/wechat_sytle_track"
+            app:track="@drawable/wechat_style_track"
+            android:focusable="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="20dp"
+        android:foreground="@color/gray"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_fingerprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/fingerprint"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_fingerprint"
+            android:text="@string/fingerprint_summary"
+            android:textSize="15sp" />
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/fingerprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="10dp"
+            android:switchMinWidth="40dp"
+            android:background="@null"
+            android:thumb="@drawable/wechat_style_thumb"
+            app:track="@drawable/wechat_style_track"
             android:focusable="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

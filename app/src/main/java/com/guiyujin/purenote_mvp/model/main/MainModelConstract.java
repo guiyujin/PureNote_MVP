@@ -5,8 +5,7 @@ import android.content.Context;
 import com.guiyujin.purenote_mvp.base.BaseModel;
 import com.guiyujin.purenote_mvp.base.BaseView;
 import com.guiyujin.purenote_mvp.base.IPresenter;
-import com.guiyujin.purenote_mvp.callback.ICallBack;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
+import com.guiyujin.purenote_mvp.base.ICallBack;
 import com.guiyujin.purenote_mvp.room.Note;
 
 import java.util.List;
@@ -24,8 +23,12 @@ import java.util.List;
  * @Version: 1.0
  */
 public interface MainModelConstract {
+    interface MainCallBack extends ICallBack{
+        void onSuccess(List<Note> noteList);
+    }
+
     interface Model extends BaseModel {
-        void search(List<Note> note, String text, Context context, ICallBack iCallBack);
+        void search(List<Note> note, String text, Context context, MainCallBack mainCallBack);
         void delete(Note note, Context context);
     }
 

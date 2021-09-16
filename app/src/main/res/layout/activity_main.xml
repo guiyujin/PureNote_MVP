@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/MainToolbarPopupTheme" />
+            app:popupTheme="@style/MainToolbarPopupTheme"
+            app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -33,10 +34,11 @@
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="30dp"
         android:backgroundTint="@color/MiAdd"
-        app:rippleColor="@color/MicolorPrimary"
+        app:rippleColor="@color/MiColorPrimary"
         app:borderWidth="0dp"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
         android:focusable="true"
-        android:src="@drawable/ic_add2"
+        android:src="@drawable/ic_add"
         app:fabSize="normal">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>

@@ -1,4 +1,4 @@
-package com.guiyujin.purenote_mvp.callback;
+package com.guiyujin.purenote_mvp.base;
 
 import android.content.Intent;
 
@@ -19,9 +19,5 @@ import java.util.List;
  * @Version: 1.0
  */
 public interface ICallBack {
-    void onSuccess();
     void onFailed();
-
-    void onSuccess(Intent intent);
-    void onSuccess(List<Note> noteList);
 }

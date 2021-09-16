@@ -2,10 +2,11 @@ package com.guiyujin.purenote_mvp.model.addcontent;
 
 import android.content.Context;
 
-import com.guiyujin.purenote_mvp.callback.ICallBack;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
+import com.guiyujin.lib_common.security.AESCrypt;
 import com.guiyujin.purenote_mvp.room.DBengine;
 import com.guiyujin.purenote_mvp.room.Note;
+
+import java.security.GeneralSecurityException;
 
 /**
  * @ProjectName: PureNote_MVP
@@ -19,11 +20,11 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class AddcontentModelImpl implements AddContentConstract.Model{
+public class AddContentModelImpl implements AddContentConstract.Model{
     @Override
-    public void save(Note note, Context context, ICallBack iCallBack) {
+    public void save(Note note, Context context, AddContentConstract.AddCallBack addCallBack) {
         DBengine dBengine = new DBengine(context.getApplicationContext());
         dBengine.insert(note);
-        iCallBack.onSuccess();
+        addCallBack.onSuccess();
     }
 }

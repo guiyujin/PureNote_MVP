@@ -11,12 +11,12 @@ import java.util.Date;
 public class Util {
 
     public static String getTime(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
         Date curDate = new Date();
         return format.format(curDate);
     }
 
-    private static String calenderEventURL = null;
+    private static String calenderEventURL;
     static {
         if (Integer.parseInt(Build.VERSION.SDK) >= 8) {
             calenderEventURL = "content://com.android.calendar/events";

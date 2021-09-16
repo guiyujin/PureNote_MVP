@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.guiyujin.purenote_mvp.Util;
-import com.guiyujin.purenote_mvp.callback.ICallBack;
 import com.guiyujin.purenote_mvp.room.DBengine;
 import com.guiyujin.purenote_mvp.room.Note;
 
@@ -34,11 +33,11 @@ public class DetailModelImpl implements DetailConstract.Model{
     }
 
     @Override
-    public void share(Note note, ICallBack iCallBack) {
+    public void share(Note note, DetailConstract.DetailCallBack detailCallBack) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, note.getContent().replaceAll("<img src='(.*?)'/>","[图片]").replaceAll("<voice src='(.*?)'/>","[语音]"));
-        iCallBack.onSuccess(intent);
+        detailCallBack.onSuccess(intent);
 
     }
 

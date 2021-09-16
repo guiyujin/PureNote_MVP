@@ -7,13 +7,16 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.guiyujin.lib_common.security.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
 import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
-import com.guiyujin.purenote_mvp.model.addcontent.AddcontentModelImpl;
+import com.guiyujin.purenote_mvp.model.addcontent.AddContentModelImpl;
 import com.guiyujin.purenote_mvp.model.addcontent.AddcontentPresenter;
 import com.guiyujin.purenote_mvp.room.Note;
+
+import java.security.GeneralSecurityException;
 
 /**
  * @ProjectName: PureNote_MVP
@@ -27,8 +30,9 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddcontentModelImpl> implements AddContentConstract.View {
-    private EditText et_text;
+public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddContentModelImpl> implements AddContentConstract.View {
+    private EditText et_detail_text, et_detail_title;
+    private String text_title, text_content, encryptText;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -43,8 +47,8 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, Addcon
     }
 
     @Override
-    protected AddcontentModelImpl initModel() {
-        return new AddcontentModelImpl();
+    protected AddContentModelImpl initModel() {
+        return new AddContentModelImpl();
     }
 
     @Override
@@ -64,7 +68,8 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, Addcon
 
     @Override
     public void initView(View view) {
-        et_text = find(R.id.et_text);
+        et_detail_title = find(R.id.et_title);
+        et_detail_text = find(R.id.et_text);
 
         initToolBar(R.id.toolbar_add, R.menu.menu_add);
     }
@@ -78,7 +83,16 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, Addcon
     public void widgetClick(int id) {
         switch (id){
             case R.id.action_save:
-                Note note = new Note(et_text.getText().toString(), Util.getTime());
+                text_title = et_detail_title.getText().toString();
+                text_content = et_detail_text.getText().toString();
+                if (text_title != null && text_content != null){
+                    try {
+                        encryptText = AESCrypt.encrypt(et_detail_title.getText().toString(), text_content);
+                    } catch (GeneralSecurityException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Note note = new Note(text_title, encryptText, Util.getTime());
                 presenter.save(note,this);
                 finish();
                 break;
@@ -112,6 +126,7 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, Addcon
 
     @Override
     public void clear() {
-        et_text.setText("");
+        et_detail_title.setText("");
+        et_detail_text.setText("");
     }
 }

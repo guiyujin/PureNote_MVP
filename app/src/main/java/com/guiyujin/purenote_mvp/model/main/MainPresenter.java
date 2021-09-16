@@ -1,11 +1,8 @@
 package com.guiyujin.purenote_mvp.model.main;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.guiyujin.purenote_mvp.base.BasePresenter;
-import com.guiyujin.purenote_mvp.callback.ICallBack;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
 import com.guiyujin.purenote_mvp.room.Note;
 
 import java.util.List;
@@ -26,25 +23,15 @@ public class MainPresenter  extends BasePresenter<MainModelConstract.View, MainM
 
     @Override
     public void search(List<Note> note, String text, Context context) {
-        mModel.search(note, text, context, new ICallBack() {
+        mModel.search(note, text, context, new MainModelConstract.MainCallBack() {
             @Override
-            public void onSuccess() {
-
+            public void onSuccess(List<Note> noteList) {
+                mView.onSearchSuccess(noteList);
             }
 
             @Override
             public void onFailed() {
 
-            }
-
-            @Override
-            public void onSuccess(Intent intent) {
-
-            }
-
-            @Override
-            public void onSuccess(List<Note> noteList) {
-                mView.onSearchSuccess(noteList);
             }
         });
     }

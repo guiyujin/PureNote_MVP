@@ -1,6 +1,8 @@
 package com.guiyujin.purenote_mvp.activity;
 
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,11 +14,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.guiyujin.purenote_mvp.R;
+
+import java.util.concurrent.Executor;
 
 /**
  * @ProjectName: PureNote_MVP
@@ -31,7 +39,11 @@ import com.guiyujin.purenote_mvp.R;
  * @Version: 1.0
  */
 public class LauncherActivity extends AppCompatActivity {
+    private Boolean isFinger;
     private ImageView imageView;
+    private Executor executor;
+    BiometricPrompt biometricPrompt;
+    BiometricPrompt.PromptInfo promptInfo;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -41,7 +53,61 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
 
         imageView = findViewById(R.id.imageView);
+        SharedPreferences sp = getSharedPreferences("settings", MODE_PRIVATE);
+        isFinger = sp.getBoolean("isFinger", true);
+        showLauncherAnim();
+    }
 
+    private void checkFinger() {
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(LauncherActivity.this,
+                executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(getApplicationContext(),
+                        "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        .show();
+                finish();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(),
+                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Authentication failed",
+                        Toast.LENGTH_SHORT)
+                        .show();
+                finish();
+            }
+        });
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("指纹验证")
+                .setSubtitle("请验证指纹")
+                .setNegativeButtonText("取消")
+                .build();
+
+        biometricPrompt.authenticate(promptInfo);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    private void showLauncherAnim() {
         AnimationSet set = new AnimationSet(false);
         ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f,1,0.5f,1,
                 Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,1);
@@ -58,16 +124,14 @@ public class LauncherActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if (isFinger){
+                    checkFinger();
+                }else {
+                    Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
-        }, 1000);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
+        }, 2000);
     }
 }

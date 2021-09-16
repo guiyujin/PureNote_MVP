@@ -2,15 +2,13 @@ package com.guiyujin.purenote_mvp.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 
+import com.guiyujin.lib_common.security.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
@@ -18,6 +16,8 @@ import com.guiyujin.purenote_mvp.model.detail.DetailConstract;
 import com.guiyujin.purenote_mvp.model.detail.DetailModelImpl;
 import com.guiyujin.purenote_mvp.model.detail.DetailPresenter;
 import com.guiyujin.purenote_mvp.room.Note;
+
+import java.security.GeneralSecurityException;
 
 /**
  * @ProjectName: PureNote_MVP
@@ -32,8 +32,9 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @Version: 1.0
  */
 public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImpl> implements DetailConstract.View {
-    private EditText editText;
-    private String content;
+    private EditText et_detail_text, et_detail_title;
+    private String text_title, text_content, decryptText;
+    private String title, content;
     private int _id;
 
     @Override
@@ -55,6 +56,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
 
     @Override
     public void initParms(Bundle parms) {
+        title = parms.getString("title");
         content = parms.getString("content");
         _id = parms.getInt("_id");
     }
@@ -71,9 +73,16 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
 
     @Override
     public void initView(View view) {
-        editText = findViewById(R.id.d_text);
+        et_detail_title = find(R.id.d_title);
+        et_detail_text = findViewById(R.id.d_text);
 
-        editText.setText(content);
+        et_detail_title.setText(title);
+        try {
+            decryptText = AESCrypt.decrypt(title, content);
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        et_detail_text.setText(decryptText);
         initToolBar(R.id.toolbar_detail, R.menu.menu_detail);
     }
 
@@ -84,7 +93,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
 
     @Override
     public void widgetClick(int id) {
-        Note note = new Note(editText.getText().toString(), Util.getTime());
+        Note note = new Note(et_detail_title.getText().toString(), et_detail_text.getText().toString(), Util.getTime());
         note.setId(_id);
         switch (id) {
             case R.id.action_save:

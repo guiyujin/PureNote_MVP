@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Note.class}, version = 1, exportSchema = false)
+@Database(entities = {Note.class}, version = 2, exportSchema = false)
 public abstract class NoteDatabase extends RoomDatabase {
     public abstract NoteDAO getNoteDao();
 
@@ -15,7 +15,9 @@ public abstract class NoteDatabase extends RoomDatabase {
         if (INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext()
                     , NoteDatabase.class
-                    , "notes").allowMainThreadQueries().build();
+                    , "notes").allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return INSTANCE;
     }

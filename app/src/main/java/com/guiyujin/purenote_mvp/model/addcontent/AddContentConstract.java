@@ -5,7 +5,7 @@ import android.content.Context;
 import com.guiyujin.purenote_mvp.base.BaseModel;
 import com.guiyujin.purenote_mvp.base.BaseView;
 import com.guiyujin.purenote_mvp.base.IPresenter;
-import com.guiyujin.purenote_mvp.callback.ICallBack;
+import com.guiyujin.purenote_mvp.base.ICallBack;
 import com.guiyujin.purenote_mvp.room.Note;
 
 /**
@@ -21,8 +21,12 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @Version: 1.0
  */
 public interface AddContentConstract {
+    interface AddCallBack extends ICallBack{
+        void onSuccess();
+    }
+
     interface Model extends BaseModel {
-        void save(Note note, Context context, ICallBack iCallBack);
+        void save(Note note, Context context, AddCallBack addCallBack);
     }
 
     interface View extends BaseView {

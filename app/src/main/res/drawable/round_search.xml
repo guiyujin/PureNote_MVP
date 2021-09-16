@@ -11,6 +11,6 @@
     <!-- Shape的描边，下面指定了描边的宽度和描边的颜色 -->
     <stroke
         android:width="0dp"
-        android:color="@color/MicolorPrimary" />
+        android:color="@color/MiColorPrimary" />
 
 </shape>

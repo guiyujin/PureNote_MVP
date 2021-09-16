@@ -2,7 +2,6 @@ package com.guiyujin.purenote_mvp.model.main;
 
 import android.content.Context;
 
-import com.guiyujin.purenote_mvp.callback.ICallBack;
 import com.guiyujin.purenote_mvp.room.DBengine;
 import com.guiyujin.purenote_mvp.room.Note;
 
@@ -24,14 +23,14 @@ import java.util.List;
 public class MainModelImpl implements MainModelConstract.Model{
 
     @Override
-    public void search(List<Note> noteList, String text, Context context, ICallBack iCallBack) {
+    public void search(List<Note> noteList, String text, Context context, MainModelConstract.MainCallBack mainCallBack) {
         LinkedList<Note> filterResults = new LinkedList<>();
         for(Note note : noteList){
-            if (note.getContent().contains(text)) {
+            if (note.getTitle().contains(text)) {
                 filterResults.add(note);
             }
         }
-        iCallBack.onSuccess(filterResults);
+        mainCallBack.onSuccess(filterResults);
     }
 
     @Override

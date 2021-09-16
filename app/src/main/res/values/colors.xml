@@ -24,7 +24,7 @@
     <color name="checked">#E6F2FF</color>
     <color name="Primary">#FFFFFF</color>
 
-    <color name="MicolorPrimary">#F7F7F7</color>
-    <color name="MicolorPrimaryDark">#F7F7F7</color>
-    <color name="Misearch">#969696</color>
+    <color name="MiColorPrimary">#F7F7F7</color>
+    <color name="MiColorPrimaryDark">#F7F7F7</color>
+    <color name="MiSearch">#969696</color>
 </resources>

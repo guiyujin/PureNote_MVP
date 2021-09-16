@@ -1,14 +1,9 @@
 package com.guiyujin.purenote_mvp.model.addcontent;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.guiyujin.purenote_mvp.base.BasePresenter;
-import com.guiyujin.purenote_mvp.callback.ICallBack;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
 import com.guiyujin.purenote_mvp.room.Note;
-
-import java.util.List;
 
 /**
  * @ProjectName: PureNote_MVP
@@ -25,7 +20,7 @@ import java.util.List;
 public class AddcontentPresenter extends BasePresenter<AddContentConstract.View, AddContentConstract.Model> implements AddContentConstract.presenter{
     @Override
     public void save(Note note, Context context) {
-        mModel.save(note, context, new ICallBack() {
+        mModel.save(note, context, new AddContentConstract.AddCallBack() {
             @Override
             public void onSuccess() {
                 mView.onSuccess();
@@ -34,16 +29,6 @@ public class AddcontentPresenter extends BasePresenter<AddContentConstract.View,
             @Override
             public void onFailed() {
                 mView.onFailed();
-            }
-
-            @Override
-            public void onSuccess(Intent intent) {
-
-            }
-
-            @Override
-            public void onSuccess(List<Note> noteList) {
-
             }
         });
     }

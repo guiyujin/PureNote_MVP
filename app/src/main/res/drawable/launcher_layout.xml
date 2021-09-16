@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item >
-        <color android:color="@color/MicolorPrimary"/>
+        <color android:color="@color/MiColorPrimary"/>
     </item>
 
     <item
@@ -13,8 +13,7 @@
         >
 
         <bitmap
-            android:src="@drawable/my" />
-
+            android:src="@drawable/title_text" />
     </item>
 
 </layer-list>

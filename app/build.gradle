@@ -52,7 +52,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    implementation project(path: ':lib_common')
     api rootProject.ext.dependencies.appcompat
+    api rootProject.ext.dependencies.biometric
     implementation rootProject.ext.dependencies.material
     api rootProject.ext.dependencies.constraintlayout
     testImplementation 'junit:junit:4.+'

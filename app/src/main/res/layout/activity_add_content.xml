@@ -22,12 +22,28 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <EditText
-        android:id="@+id/et_text"
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_weight="1"
+        android:layout_marginBottom="20dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:background="@null"
+        android:textCursorDrawable="@drawable/et_cursor"
+        android:hint="标题输入"
+        android:gravity="top"/>
+
+    <EditText
+        android:id="@+id/et_text"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
         android:background="@null"
         android:textCursorDrawable="@drawable/et_cursor"
         android:hint="记事本输入"

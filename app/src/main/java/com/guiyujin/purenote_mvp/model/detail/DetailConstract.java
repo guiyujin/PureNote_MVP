@@ -6,8 +6,7 @@ import android.content.Intent;
 import com.guiyujin.purenote_mvp.base.BaseModel;
 import com.guiyujin.purenote_mvp.base.BaseView;
 import com.guiyujin.purenote_mvp.base.IPresenter;
-import com.guiyujin.purenote_mvp.callback.ICallBack;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
+import com.guiyujin.purenote_mvp.base.ICallBack;
 import com.guiyujin.purenote_mvp.room.Note;
 
 /**
@@ -23,10 +22,14 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @Version: 1.0
  */
 public interface DetailConstract {
+    interface DetailCallBack extends ICallBack{
+        void onSuccess(Intent intent);
+    }
+
     interface Model extends BaseModel {
         void delete(Note note, Context context);
         void update(Note note, Context context);
-        void share(Note note, ICallBack iCallBack);
+        void share(Note note, DetailCallBack detailCallBack);
         void addAlarm(Context context, Note note);
     }
 

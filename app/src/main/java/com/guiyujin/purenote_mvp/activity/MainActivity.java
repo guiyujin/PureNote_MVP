@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
         myAdapter.setOnItemLongClickListener((v, position) -> {
             OperationDialog operationDialog = new OperationDialog(this);
-            operationDialog.showDialog(R.layout.operation_dialog, Gravity.CENTER);
+            operationDialog.showDialog(R.layout.operation_dialog, Gravity.BOTTOM);
             operationDialog.setOperationDialogListener(new OperationDialog.OperationDialogListener() {
                 @Override
                 public void edit() {
@@ -101,10 +101,10 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
                 @Override
                 public void delete() {
-                    Note note = new Note(dBengine.getAllNotes().get(position).getContent(), Util.getTime());
+                    Note note = new Note(dBengine.getAllNotes().get(position).getTitle(),
+                            dBengine.getAllNotes().get(position).getContent(), Util.getTime());
                     note.setId(dBengine.getAllNotes().get(position).getId());
                     presenter.delete(note,MainActivity.this);
-
                 }
             });
         });
@@ -131,6 +131,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
     private void edit(int position) {
         Bundle bundle = new Bundle();
+        bundle.putString("title", dBengine.getAllNotes().get(position).getTitle());
         bundle.putString("content", dBengine.getAllNotes().get(position).getContent());
         bundle.putInt("_id", dBengine.getAllNotes().get(position).getId());
         startActivity(DetailActivity.class, bundle);
