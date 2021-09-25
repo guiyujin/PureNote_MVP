@@ -3,12 +3,13 @@ package com.guiyujin.purenote_mvp.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.guiyujin.lib_common.security.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
@@ -33,7 +34,7 @@ import java.security.GeneralSecurityException;
  */
 public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImpl> implements DetailConstract.View {
     private EditText et_detail_text, et_detail_title;
-    private String text_title, text_content, decryptText;
+    private String text_title, text_content;
     private String title, content;
     private int _id;
 
@@ -41,6 +42,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         presenter.attach(this, model);
     }
 
@@ -77,13 +79,9 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
         et_detail_text = findViewById(R.id.d_text);
 
         et_detail_title.setText(title);
-        try {
-            decryptText = AESCrypt.decrypt(title, content);
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        }
-        et_detail_text.setText(decryptText);
-        initToolBar(R.id.toolbar_detail, R.menu.menu_detail);
+        et_detail_text.setText(content);
+        initToolBar(R.id.toolbar_detail);
+        setMenuRes(R.menu.menu_detail);
     }
 
     @Override
@@ -93,12 +91,19 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
 
     @Override
     public void widgetClick(int id) {
-        Note note = new Note(et_detail_title.getText().toString(), et_detail_text.getText().toString(), Util.getTime());
+        text_title = et_detail_title.getText().toString();
+        text_content = et_detail_text.getText().toString();
+        Note note = new Note(text_title, text_content, Util.getTime());
         note.setId(_id);
         switch (id) {
             case R.id.action_save:
                 presenter.update(note, this);
                 finish();
+                break;
+            case R.id.action_edit:
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                getMenu().findItem(R.id.action_save).setVisible(true);
+                getMenu().findItem(R.id.action_edit).setVisible(false);
                 break;
             case R.id.action_delete:
                 presenter.delete(note, this);

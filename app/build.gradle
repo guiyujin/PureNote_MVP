@@ -7,6 +7,23 @@ if ( rootProject.ext.android.is_app){
 
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('E:\\others\\key\\mykey.jks')
+            storePassword 'lovenlee3978'
+            keyAlias 'mykey'
+            keyPassword 'lovenlee3978'
+        }
+    }
+
+//    signingConfigs {
+//        config {
+//            keyAlias 'mykey'
+//            keyPassword 'lovenlee3978'
+//            storeFile file('E:\\others\\key\\mykey.jks')
+//            storePassword 'lovenlee3978'
+//        }
+//    }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
@@ -52,7 +69,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    implementation project(path: ':lib_common')
     api rootProject.ext.dependencies.appcompat
     api rootProject.ext.dependencies.biometric
     implementation rootProject.ext.dependencies.material

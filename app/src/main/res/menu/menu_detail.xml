@@ -15,6 +15,14 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_confirm"
         android:title="@string/add_content"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/edit_mode"
         app:showAsAction="ifRoom" />
 
 

@@ -33,7 +33,7 @@
         android:textStyle="bold"
         android:background="@null"
         android:textCursorDrawable="@drawable/et_cursor"
-        android:hint="标题输入"
+        android:hint="标题"
         android:gravity="top"/>
 
     <EditText
@@ -46,7 +46,7 @@
 
         android:background="@null"
         android:textCursorDrawable="@drawable/et_cursor"
-        android:hint="记事本输入"
+        android:hint="开始输入"
         android:gravity="top"/>
 
 

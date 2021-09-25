@@ -16,12 +16,7 @@ import android.util.Log;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class App extends Application {
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-    }
+public class MyApplication extends Application {
 
     @Override
     public void onCreate() {

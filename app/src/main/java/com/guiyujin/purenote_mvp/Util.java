@@ -1,12 +1,23 @@
 package com.guiyujin.purenote_mvp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
+import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+
+import com.guiyujin.lib_common.biometrics.fingerprint.FingerprintCallback;
+import com.guiyujin.lib_common.biometrics.fingerprint.FingerprintVerifyManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static android.provider.Settings.System.getString;
 
 public class Util {
 
@@ -34,4 +45,13 @@ public class Util {
                 .putExtra("description", content);
         context.startActivity(intent);
     }
+
+    public static void finger(Context context){
+//        FingerprintVerifyManager.Builder builder = new FingerprintVerifyManager.Builder(context);
+//        builder.callback(fingerprintCallback)
+//                .fingerprintColor(ContextCompat.getColor(context, R.color.colorAccent))
+//                .build();
+    }
+
+
 }

@@ -18,6 +18,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.guiyujin.purenote_mvp.R;
 
@@ -50,11 +53,19 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     private TextView mToolbarSubTitle;
     protected T presenter;
     protected E model;
+    protected FragmentManager fragmentManager;
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    private Menu menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fragmentManager = getSupportFragmentManager();
         presenter = initPresenter();
         model = initModel();
         Bundle bundle = getIntent().getExtras();
@@ -184,6 +195,15 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         startActivityForResult(intent, requestCode);
     }
 
+    public void switchFragment(int contentRes, Fragment from, Fragment to) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (!to.isAdded()) {	// 先判断是否被add过
+            transaction.hide(from).add(contentRes, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+        } else {
+            transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+        }
+    }
+
 
     /**
      * [简化Toast]
@@ -204,6 +224,29 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
             getWindow().addFlags(
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+    }
+
+    /**
+     * 封装Toolbar
+     */
+    public void initToolBar(int toolbar_res){
+        mToolbar = find(toolbar_res);
+        this.menu_res = menu_res;
+        if (mToolbar != null){
+            setSupportActionBar(mToolbar);
+        }
+        if (mToolbarTitle != null){
+            mToolbarTitle.setText(getTitle());
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public int getMenu_res() {
+        return menu_res;
+    }
+
+    public void setMenuRes(int menu_res){
+        this.menu_res = menu_res;
     }
 
     /**
@@ -307,7 +350,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(menu_res, menu);
-
+        this.menu = menu;
         return true;
     }
 

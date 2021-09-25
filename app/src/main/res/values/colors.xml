@@ -27,4 +27,5 @@
     <color name="MiColorPrimary">#F7F7F7</color>
     <color name="MiColorPrimaryDark">#F7F7F7</color>
     <color name="MiSearch">#969696</color>
+    <color name="MiSelected">#EBEBEB</color>
 </resources>

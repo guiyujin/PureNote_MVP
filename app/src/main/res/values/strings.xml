@@ -15,4 +15,5 @@
 
     <string name="fingerprint">指纹识别</string>
     <string name="fingerprint_summary">开/关指纹识别</string>
+    <string name="edit_mode">编辑模式</string>
 </resources>

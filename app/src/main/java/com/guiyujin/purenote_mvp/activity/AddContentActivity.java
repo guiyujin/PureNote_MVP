@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.guiyujin.lib_common.security.AESCrypt;
+
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
@@ -32,7 +32,7 @@ import java.security.GeneralSecurityException;
  */
 public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddContentModelImpl> implements AddContentConstract.View {
     private EditText et_detail_text, et_detail_title;
-    private String text_title, text_content, encryptText;
+    private String text_title, text_content;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -85,16 +85,13 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddCon
             case R.id.action_save:
                 text_title = et_detail_title.getText().toString();
                 text_content = et_detail_text.getText().toString();
-                if (text_title != null && text_content != null){
-                    try {
-                        encryptText = AESCrypt.encrypt(et_detail_title.getText().toString(), text_content);
-                    } catch (GeneralSecurityException e) {
-                        e.printStackTrace();
-                    }
+                if (text_title.equals("")){
+                    showToast("请输入标题");
+                }else {
+                    Note note = new Note(text_title, text_content, Util.getTime());
+                    presenter.save(note,this);
+                    finish();
                 }
-                Note note = new Note(text_title, encryptText, Util.getTime());
-                presenter.save(note,this);
-                finish();
                 break;
             case R.id.action_clear:
                 presenter.clear();

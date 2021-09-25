@@ -2,16 +2,19 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item >
+        <!-- 整体的背景颜色 -->
         <color android:color="@color/MiColorPrimary"/>
     </item>
 
     <item
+
         android:width="300dp"
         android:height="100dp"
         android:top="50dp"
         android:gravity="center_horizontal"
         >
 
+        <!-- 图标和图标位置 -->
         <bitmap
             android:src="@drawable/title_text" />
     </item>

@@ -36,13 +36,13 @@ public class DetailModelImpl implements DetailConstract.Model{
     public void share(Note note, DetailConstract.DetailCallBack detailCallBack) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, note.getContent().replaceAll("<img src='(.*?)'/>","[图片]").replaceAll("<voice src='(.*?)'/>","[语音]"));
+        intent.putExtra(Intent.EXTRA_TEXT, note.getTitle().replaceAll("<img src='(.*?)'/>","[图片]").replaceAll("<voice src='(.*?)'/>","[语音]"));
         detailCallBack.onSuccess(intent);
 
     }
 
     @Override
     public void addAlarm(Context context, Note note) {
-        Util.OpenCalendar(context, note.getContent());
+        Util.OpenCalendar(context, note.getTitle());
     }
 }
