@@ -2,7 +2,6 @@ package com.guiyujin.purenote_mvp.model.addcontent;
 
 import android.content.Context;
 
-import com.guiyujin.lib_common.security.AESCrypt;
 import com.guiyujin.purenote_mvp.room.DBengine;
 import com.guiyujin.purenote_mvp.room.Note;
 

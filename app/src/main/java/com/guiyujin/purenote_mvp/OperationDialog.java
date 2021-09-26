@@ -37,12 +37,12 @@ public class OperationDialog extends AlertDialog.Builder implements View.OnClick
         dialog = new Dialog(context, R.style.photo_dialog);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
-
-        if (gravity == Gravity.BOTTOM){
-            window.setBackgroundDrawableResource(R.drawable.bottom_round_operation_dialog);
-        }else if (gravity == Gravity.CENTER){
-            window.setBackgroundDrawableResource(R.drawable.center_round_operation_dialog);
-        }
+        window.setBackgroundDrawableResource(R.drawable.center_round_operation_dialog);
+//        if (gravity == Gravity.BOTTOM){
+//            window.setBackgroundDrawableResource(R.drawable.bottom_round_operation_dialog);
+//        }else if (gravity == Gravity.CENTER){
+//            window.setBackgroundDrawableResource(R.drawable.center_round_operation_dialog);
+//        }
 
         //设置弹出窗口大小
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);

@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
         myAdapter.setOnItemLongClickListener((v, position) -> {
             OperationDialog operationDialog = new OperationDialog(this);
-            operationDialog.showDialog(R.layout.operation_dialog, Gravity.BOTTOM);
+            operationDialog.showDialog(R.layout.operation_dialog_center, Gravity.CENTER);
             operationDialog.setOperationDialogListener(new OperationDialog.OperationDialogListener() {
                 @Override
                 public void edit() {

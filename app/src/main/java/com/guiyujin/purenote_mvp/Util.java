@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
-import com.guiyujin.lib_common.biometrics.fingerprint.FingerprintCallback;
-import com.guiyujin.lib_common.biometrics.fingerprint.FingerprintVerifyManager;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
