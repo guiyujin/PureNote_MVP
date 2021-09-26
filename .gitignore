@@ -10,5 +10,4 @@ target
 .externalNativeBuild
 .cxx
 local.properties
-/.idea/
-/.idea/
+**/.idea
