@@ -4,11 +4,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guiyujin.purenote_mvp.MyAdapter;
@@ -32,6 +34,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
     private SearchView mSearchView;
     private boolean isSearch = false;
     private List<Note> note;
+    private boolean isMenuOpen = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,12 +158,30 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
     public void widgetClick(int id) {
         switch (id){
             case R.id.add:
-                startActivity(AddContentActivity.class);
+                changeStatus();
+                rotateFloatingButton();
+//                startActivity(AddContentActivity.class);
                 break;
             case R.id.action_settings:
                 startActivity(SettingsActivity.class);
                 break;
             default:
+        }
+    }
+
+    private void rotateFloatingButton(){
+        ObjectAnimator animator = isMenuOpen ? ObjectAnimator.ofFloat(fab
+                , "rotation", 45F, 0f) : ObjectAnimator.ofFloat(fab, "rotation", 0f, 45f);
+        animator.setDuration(150);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
+    }
+
+    private void changeStatus(){
+        if(isMenuOpen){
+            isMenuOpen = false;
+        }else{
+            isMenuOpen = true;
         }
     }
 

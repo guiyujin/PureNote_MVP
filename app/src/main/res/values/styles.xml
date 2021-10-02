@@ -17,6 +17,7 @@
         <item name="android:actionBarDivider">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textAppearanceLargePopupMenu">@style/popupmenuText</item>
+
     </style>
 
     <style name="AppTheme.Main" parent="AppTheme.Base">

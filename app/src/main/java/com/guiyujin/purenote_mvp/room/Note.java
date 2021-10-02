@@ -24,6 +24,7 @@ public class Note {
         this.time = time;
     }
 
+
     public int getId() {
         return id;
     }

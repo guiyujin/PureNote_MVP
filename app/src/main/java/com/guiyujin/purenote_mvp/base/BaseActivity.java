@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +85,16 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
             steepStatusBar();
         }
         setContentView(mContextView);
+//        if (savedInstanceState == null) {
+//            mContextView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//                @Override
+//                public boolean onPreDraw() {
+//                    mContextView.getViewTreeObserver().removeOnPreDrawListener(this);
+//                    startRootAnimation();
+//                    return true;
+//                }
+//            });
+//        }
         if (!isAllowScreenRoate) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
@@ -90,6 +102,16 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         initListener();
         doBusiness(this);
     }
+
+//    private void startRootAnimation() {
+//        mContextView.setScaleY(0.1f);
+//        mContextView.setPivotY(mContextView.getY() + mContextView.getHeight() / 2);
+//        mContextView.animate()
+//                .scaleY(1)
+//                .setDuration(500)
+//                .setInterpolator(new AccelerateInterpolator())
+//                .start();
+//    }
 
     protected abstract T initPresenter();
     protected abstract E initModel();
