@@ -158,9 +158,9 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
     public void widgetClick(int id) {
         switch (id){
             case R.id.add:
-                changeStatus();
-                rotateFloatingButton();
-//                startActivity(AddContentActivity.class);
+//                changeStatus();
+//                rotateFloatingButton();
+                startActivity(AddContentActivity.class);
                 break;
             case R.id.action_settings:
                 startActivity(SettingsActivity.class);

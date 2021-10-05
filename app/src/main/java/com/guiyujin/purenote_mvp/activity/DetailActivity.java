@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.guiyujin.purenote_mvp.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
@@ -79,7 +80,11 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
         et_detail_text = findViewById(R.id.d_text);
 
         et_detail_title.setText(title);
-        et_detail_text.setText(content);
+        try {
+            et_detail_text.setText(AESCrypt.decrypt("mypassword", content));
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
         initToolBar(R.id.toolbar_detail);
         setMenuRes(R.menu.menu_detail);
     }

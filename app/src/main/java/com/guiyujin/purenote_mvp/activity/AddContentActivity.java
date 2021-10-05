@@ -8,6 +8,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 
 
+import com.guiyujin.purenote_mvp.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
@@ -88,7 +89,12 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddCon
                 if (text_title.equals("")){
                     showToast("请输入标题");
                 }else {
-                    Note note = new Note(text_title, text_content, Util.getTime());
+                    Note note = null;
+                    try {
+                        note = new Note(text_title, AESCrypt.encrypt("mypassword", text_content), Util.getTime());
+                    } catch (GeneralSecurityException e) {
+                        e.printStackTrace();
+                    }
                     presenter.save(note,this);
                     finish();
                 }
