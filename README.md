@@ -22,6 +22,10 @@
 
 ## 开发成果：
 
+![main.jpg](https://github.com/guiyujin/PureNote_MVP/blob/master/img/main.jpg)
+![add.jpg](https://github.com/guiyujin/PureNote_MVP/blob/master/img/add.jpg)
+![detail.jpg](https://github.com/guiyujin/PureNote_MVP/blob/master/img/detail.jpg)
+![settings.jpg](https://github.com/guiyujin/PureNote_MVP/blob/master/img/settings.jpg)
 
 
 
