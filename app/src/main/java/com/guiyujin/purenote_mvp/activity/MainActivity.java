@@ -18,7 +18,7 @@ import com.guiyujin.purenote_mvp.OperationDialog;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.mvp.BaseMVPActivity;
-import com.guiyujin.purenote_mvp.model.main.MainModelConstract;
+import com.guiyujin.purenote_mvp.model.main.MainModelContract;
 import com.guiyujin.purenote_mvp.model.main.MainModelImpl;
 import com.guiyujin.purenote_mvp.model.main.MainPresenter;
 import com.guiyujin.purenote_mvp.room.DBengine;
@@ -26,7 +26,7 @@ import com.guiyujin.purenote_mvp.room.Note;
 
 import java.util.List;
 
-public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> implements MainModelConstract.View {
+public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> implements MainModelContract.View {
     private MyAdapter myAdapter;
     private DBengine dBengine;
     private FloatingActionButton fab;

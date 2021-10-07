@@ -20,10 +20,10 @@ import java.util.List;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class MainModelImpl implements MainModelConstract.Model{
+public class MainModelImpl implements MainModelContract.Model{
 
     @Override
-    public void search(List<Note> noteList, String text, Context context, MainModelConstract.MainCallBack mainCallBack) {
+    public void search(List<Note> noteList, String text, Context context, MainModelContract.MainCallBack mainCallBack) {
         LinkedList<Note> filterResults = new LinkedList<>();
         for(Note note : noteList){
             if (note.getTitle().contains(text)) {

@@ -19,11 +19,10 @@ import androidx.lifecycle.OnLifecycleEvent;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class BasePresenter<V extends BaseView, E extends BaseModel> implements IPresenter<V, E>, LifecycleObserver {
+public class BasePresenter<V extends BaseView, E extends BaseModel> implements LifecycleObserver {
     public V mView;
     public E mModel;
 
-    @Override
     public void attach(V view, E model) {
         Log.i("MYGUIYUJIN", getClass().getName() + " ATTACH");
         mView = view;
@@ -31,7 +30,6 @@ public class BasePresenter<V extends BaseView, E extends BaseModel> implements I
         mView.getLifecycle().addObserver(this);
     }
 
-    @Override
     public void detach() {
         if (mView != null){
             Log.i("MYGUIYUJIN", getClass().getName() + " DEATTACH");

@@ -19,7 +19,7 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class DetailModelImpl implements DetailConstract.Model{
+public class DetailModelImpl implements DetailContract.Model{
     @Override
     public void delete(Note note, Context context) {
         DBengine dBengine = new DBengine(context.getApplicationContext());
@@ -33,7 +33,7 @@ public class DetailModelImpl implements DetailConstract.Model{
     }
 
     @Override
-    public void share(Note note, DetailConstract.DetailCallBack detailCallBack) {
+    public void share(Note note, DetailContract.DetailCallBack detailCallBack) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, note.getTitle().replaceAll("<img src='(.*?)'/>","[图片]").replaceAll("<voice src='(.*?)'/>","[语音]"));

@@ -21,7 +21,7 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public interface DetailConstract {
+public interface DetailContract {
     interface DetailCallBack extends ICallBack{
         void onSuccess(Intent intent);
     }
@@ -38,7 +38,7 @@ public interface DetailConstract {
         void share(Intent intent);
     }
 
-    interface presenter extends IPresenter<DetailConstract.View, DetailConstract.Model> {
+    interface presenter{
         void delete(Note note, Context context);
         void update(Note note, Context context);
         void share(Note note);

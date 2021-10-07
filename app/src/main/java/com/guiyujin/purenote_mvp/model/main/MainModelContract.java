@@ -22,7 +22,7 @@ import java.util.List;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public interface MainModelConstract {
+public interface MainModelContract {
     interface MainCallBack extends ICallBack{
         void onSuccess(List<Note> noteList);
     }
@@ -38,7 +38,7 @@ public interface MainModelConstract {
         void onFailed();
     }
 
-    interface presenter extends IPresenter<MainModelConstract.View, MainModelConstract.Model> {
+    interface presenter{
         void search(List<Note> note, String text, Context context);
         void delete(Note note, Context context);
         void clear();

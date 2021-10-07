@@ -17,10 +17,10 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class AddcontentPresenter extends BasePresenter<AddContentConstract.View, AddContentConstract.Model> implements AddContentConstract.presenter{
+public class AddcontentPresenter extends BasePresenter<AddContentContract.View, AddContentContract.Model> implements AddContentContract.presenter{
     @Override
     public void save(Note note, Context context) {
-        mModel.save(note, context, new AddContentConstract.AddCallBack() {
+        mModel.save(note, context, new AddContentContract.AddCallBack() {
             @Override
             public void onSuccess() {
                 mView.onSuccess();

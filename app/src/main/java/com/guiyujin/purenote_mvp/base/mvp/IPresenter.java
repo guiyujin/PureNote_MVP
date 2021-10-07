@@ -12,6 +12,7 @@ package com.guiyujin.purenote_mvp.base.mvp;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
+@Deprecated
 public interface IPresenter<V, E> {
 
     void attach(V view, E model);

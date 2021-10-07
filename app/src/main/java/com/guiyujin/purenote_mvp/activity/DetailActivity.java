@@ -13,7 +13,7 @@ import com.guiyujin.purenote_mvp.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.mvp.BaseMVPActivity;
-import com.guiyujin.purenote_mvp.model.detail.DetailConstract;
+import com.guiyujin.purenote_mvp.model.detail.DetailContract;
 import com.guiyujin.purenote_mvp.model.detail.DetailModelImpl;
 import com.guiyujin.purenote_mvp.model.detail.DetailPresenter;
 import com.guiyujin.purenote_mvp.room.Note;
@@ -32,7 +32,7 @@ import java.security.GeneralSecurityException;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class DetailActivity extends BaseMVPActivity<DetailPresenter, DetailModelImpl> implements DetailConstract.View {
+public class DetailActivity extends BaseMVPActivity<DetailPresenter, DetailModelImpl> implements DetailContract.View {
     private EditText et_detail_text, et_detail_title;
     private String text_title, text_content;
     private String title, content;

@@ -19,11 +19,11 @@ import java.util.List;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class MainPresenter  extends BasePresenter<MainModelConstract.View, MainModelConstract.Model> implements MainModelConstract.presenter{
+public class MainPresenter  extends BasePresenter<MainModelContract.View, MainModelContract.Model> implements MainModelContract.presenter{
 
     @Override
     public void search(List<Note> note, String text, Context context) {
-        mModel.search(note, text, context, new MainModelConstract.MainCallBack() {
+        mModel.search(note, text, context, new MainModelContract.MainCallBack() {
             @Override
             public void onSuccess(List<Note> noteList) {
                 mView.onSearchSuccess(noteList);

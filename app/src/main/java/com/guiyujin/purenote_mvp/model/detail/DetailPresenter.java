@@ -18,7 +18,7 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class DetailPresenter extends BasePresenter<DetailConstract.View, DetailConstract.Model> implements DetailConstract.presenter{
+public class DetailPresenter extends BasePresenter<DetailContract.View, DetailContract.Model> implements DetailContract.presenter{
     @Override
     public void delete(Note note, Context context) {
         mModel.delete(note, context);
@@ -33,7 +33,7 @@ public class DetailPresenter extends BasePresenter<DetailConstract.View, DetailC
 
     @Override
     public void share(Note note) {
-        mModel.share(note, new DetailConstract.DetailCallBack() {
+        mModel.share(note, new DetailContract.DetailCallBack() {
             @Override
             public void onSuccess(Intent intent) {
                 mView.share(intent);

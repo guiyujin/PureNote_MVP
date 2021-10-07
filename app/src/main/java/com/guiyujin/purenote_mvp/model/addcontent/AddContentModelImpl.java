@@ -5,8 +5,6 @@ import android.content.Context;
 import com.guiyujin.purenote_mvp.room.DBengine;
 import com.guiyujin.purenote_mvp.room.Note;
 
-import java.security.GeneralSecurityException;
-
 /**
  * @ProjectName: PureNote_MVP
  * @Package: com.guiyujin.purenote_mvp.model
@@ -19,9 +17,9 @@ import java.security.GeneralSecurityException;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class AddContentModelImpl implements AddContentConstract.Model{
+public class AddContentModelImpl implements AddContentContract.Model{
     @Override
-    public void save(Note note, Context context, AddContentConstract.AddCallBack addCallBack) {
+    public void save(Note note, Context context, AddContentContract.AddCallBack addCallBack) {
         DBengine dBengine = new DBengine(context.getApplicationContext());
         dBengine.insert(note);
         addCallBack.onSuccess();

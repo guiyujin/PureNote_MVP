@@ -20,7 +20,7 @@ import com.guiyujin.purenote_mvp.room.Note;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public interface AddContentConstract {
+public interface AddContentContract {
     interface AddCallBack extends ICallBack{
         void onSuccess();
     }
@@ -35,7 +35,7 @@ public interface AddContentConstract {
         void clear();
     }
 
-    interface presenter extends IPresenter<View, Model> {
+    interface presenter{
         void save(Note note, Context context);
         void clear();
     }

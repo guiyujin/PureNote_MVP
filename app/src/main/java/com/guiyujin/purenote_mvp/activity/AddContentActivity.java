@@ -12,7 +12,7 @@ import com.guiyujin.purenote_mvp.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
 import com.guiyujin.purenote_mvp.base.mvp.BaseMVPActivity;
-import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
+import com.guiyujin.purenote_mvp.model.addcontent.AddContentContract;
 import com.guiyujin.purenote_mvp.model.addcontent.AddContentModelImpl;
 import com.guiyujin.purenote_mvp.model.addcontent.AddcontentPresenter;
 import com.guiyujin.purenote_mvp.room.Note;
@@ -31,7 +31,7 @@ import java.security.GeneralSecurityException;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class AddContentActivity extends BaseMVPActivity<AddcontentPresenter, AddContentModelImpl> implements AddContentConstract.View {
+public class AddContentActivity extends BaseMVPActivity<AddcontentPresenter, AddContentModelImpl> implements AddContentContract.View {
     private EditText et_detail_text, et_detail_title;
     private String text_title, text_content;
 
