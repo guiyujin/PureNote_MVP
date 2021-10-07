@@ -1,4 +1,6 @@
-package com.guiyujin.purenote_mvp.base;
+package com.guiyujin.purenote_mvp.base.mvp;
+
+import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -23,6 +25,7 @@ public class BasePresenter<V extends BaseView, E extends BaseModel> implements I
 
     @Override
     public void attach(V view, E model) {
+        Log.i("MYGUIYUJIN", getClass().getName() + " ATTACH");
         mView = view;
         mModel = model;
         mView.getLifecycle().addObserver(this);
@@ -31,6 +34,7 @@ public class BasePresenter<V extends BaseView, E extends BaseModel> implements I
     @Override
     public void detach() {
         if (mView != null){
+            Log.i("MYGUIYUJIN", getClass().getName() + " DEATTACH");
             mView.getLifecycle().removeObserver(this);
             mView = null;
         }

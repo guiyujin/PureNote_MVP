@@ -3,7 +3,6 @@ package com.guiyujin.purenote_mvp.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -13,7 +12,7 @@ import androidx.annotation.Nullable;
 import com.guiyujin.purenote_mvp.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
-import com.guiyujin.purenote_mvp.base.BaseActivity;
+import com.guiyujin.purenote_mvp.base.mvp.BaseMVPActivity;
 import com.guiyujin.purenote_mvp.model.detail.DetailConstract;
 import com.guiyujin.purenote_mvp.model.detail.DetailModelImpl;
 import com.guiyujin.purenote_mvp.model.detail.DetailPresenter;
@@ -33,7 +32,7 @@ import java.security.GeneralSecurityException;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImpl> implements DetailConstract.View {
+public class DetailActivity extends BaseMVPActivity<DetailPresenter, DetailModelImpl> implements DetailConstract.View {
     private EditText et_detail_text, et_detail_title;
     private String text_title, text_content;
     private String title, content;
@@ -48,6 +47,13 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
     }
 
     @Override
+    protected void initParams(Bundle params) {
+        title = params.getString("title");
+        content = params.getString("content");
+        _id = params.getInt("_id");
+    }
+
+    @Override
     protected DetailPresenter initPresenter() {
         return new DetailPresenter();
     }
@@ -55,13 +61,6 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
     @Override
     protected DetailModelImpl initModel() {
         return new DetailModelImpl();
-    }
-
-    @Override
-    public void initParms(Bundle parms) {
-        title = parms.getString("title");
-        content = parms.getString("content");
-        _id = parms.getInt("_id");
     }
 
     @Override
@@ -95,10 +94,21 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public void widgetClick(int id) {
         text_title = et_detail_title.getText().toString();
         text_content = et_detail_text.getText().toString();
-        Note note = new Note(text_title, text_content, Util.getTime());
+        String encryptText = null;
+        try {
+            encryptText = AESCrypt.encrypt("mypassword", text_content);
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        Note note = new Note(text_title, encryptText, Util.getTime());
         note.setId(_id);
         switch (id) {
             case R.id.action_save:
@@ -107,8 +117,8 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
                 break;
             case R.id.action_edit:
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                getMenu().findItem(R.id.action_save).setVisible(true);
-                getMenu().findItem(R.id.action_edit).setVisible(false);
+                getmMenu().findItem(R.id.action_save).setVisible(true);
+                getmMenu().findItem(R.id.action_edit).setVisible(false);
                 break;
             case R.id.action_delete:
                 presenter.delete(note, this);
@@ -132,11 +142,6 @@ public class DetailActivity extends BaseActivity<DetailPresenter, DetailModelImp
 
     @Override
     public void doBusiness(Context mContext) {
-
-    }
-
-    @Override
-    public void checkPermission() {
 
     }
 

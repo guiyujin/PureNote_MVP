@@ -17,7 +17,7 @@ import com.guiyujin.purenote_mvp.MyAdapter;
 import com.guiyujin.purenote_mvp.OperationDialog;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
-import com.guiyujin.purenote_mvp.base.BaseActivity;
+import com.guiyujin.purenote_mvp.base.mvp.BaseMVPActivity;
 import com.guiyujin.purenote_mvp.model.main.MainModelConstract;
 import com.guiyujin.purenote_mvp.model.main.MainModelImpl;
 import com.guiyujin.purenote_mvp.model.main.MainPresenter;
@@ -26,7 +26,7 @@ import com.guiyujin.purenote_mvp.room.Note;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>implements MainModelConstract.View {
+public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> implements MainModelConstract.View {
     private MyAdapter myAdapter;
     private DBengine dBengine;
     private FloatingActionButton fab;
@@ -46,6 +46,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
     }
 
     @Override
+    protected void initParams(Bundle params) {
+
+    }
+
+    @Override
     protected MainPresenter initPresenter() {
         return new MainPresenter();
     }
@@ -55,10 +60,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
         return new MainModelImpl();
     }
 
-    @Override
-    public void initParms(Bundle parms) {
 
-    }
 
     @Override
     public View bindView() {
@@ -132,6 +134,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 //        });
     }
 
+    @Override
+    protected void initData() {
+
+    }
+
     private void edit(int position) {
         Bundle bundle = new Bundle();
         bundle.putString("title", dBengine.getAllNotes().get(position).getTitle());
@@ -187,11 +194,6 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModelImpl>impl
 
     @Override
     public void doBusiness(Context mContext) {
-
-    }
-
-    @Override
-    public void checkPermission() {
 
     }
 

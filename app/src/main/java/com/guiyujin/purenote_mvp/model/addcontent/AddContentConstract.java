@@ -2,9 +2,9 @@ package com.guiyujin.purenote_mvp.model.addcontent;
 
 import android.content.Context;
 
-import com.guiyujin.purenote_mvp.base.BaseModel;
-import com.guiyujin.purenote_mvp.base.BaseView;
-import com.guiyujin.purenote_mvp.base.IPresenter;
+import com.guiyujin.purenote_mvp.base.mvp.BaseModel;
+import com.guiyujin.purenote_mvp.base.mvp.BaseView;
+import com.guiyujin.purenote_mvp.base.mvp.IPresenter;
 import com.guiyujin.purenote_mvp.base.ICallBack;
 import com.guiyujin.purenote_mvp.room.Note;
 

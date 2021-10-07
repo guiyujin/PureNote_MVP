@@ -2,7 +2,7 @@ package com.guiyujin.purenote_mvp.model.main;
 
 import android.content.Context;
 
-import com.guiyujin.purenote_mvp.base.BasePresenter;
+import com.guiyujin.purenote_mvp.base.mvp.BasePresenter;
 import com.guiyujin.purenote_mvp.room.Note;
 
 import java.util.List;

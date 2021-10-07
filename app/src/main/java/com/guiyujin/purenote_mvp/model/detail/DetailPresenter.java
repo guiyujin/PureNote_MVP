@@ -3,7 +3,7 @@ package com.guiyujin.purenote_mvp.model.detail;
 import android.content.Context;
 import android.content.Intent;
 
-import com.guiyujin.purenote_mvp.base.BasePresenter;
+import com.guiyujin.purenote_mvp.base.mvp.BasePresenter;
 import com.guiyujin.purenote_mvp.room.Note;
 
 /**

@@ -1,4 +1,4 @@
-package com.guiyujin.purenote_mvp.base;
+package com.guiyujin.purenote_mvp.base.mvp;
 
 /**
  * @ProjectName: MVPDemo

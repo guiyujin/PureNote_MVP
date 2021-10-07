@@ -7,13 +7,10 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.base.BaseActivity;
-import com.guiyujin.purenote_mvp.base.BaseModel;
-import com.guiyujin.purenote_mvp.base.BasePresenter;
 
 public class SettingsActivity extends BaseActivity {
     private ListView lv;
@@ -25,21 +22,10 @@ public class SettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseModel initModel() {
-        return null;
-    }
-
-    @Override
-    public void initParms(Bundle parms) {
+    protected void initParams(Bundle params) {
 
     }
 
@@ -59,7 +45,7 @@ public class SettingsActivity extends BaseActivity {
         sp = getSharedPreferences("settings", MODE_PRIVATE);
         editor = sp.edit();
         finger = (SwitchCompat) find(R.id.fingerprint);
-        finger.setChecked(sp.getBoolean("isFinger",true));
+        finger.setChecked(sp.getBoolean("isFinger",false));
         initToolBar(R.id.toolbar_settings, R.menu.menu_setting);
     }
 
@@ -77,6 +63,11 @@ public class SettingsActivity extends BaseActivity {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public void widgetClick(int id) {
 
     }
@@ -86,8 +77,4 @@ public class SettingsActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void checkPermission() {
-
-    }
 }

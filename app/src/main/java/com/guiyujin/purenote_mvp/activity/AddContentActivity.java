@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import com.guiyujin.purenote_mvp.AESCrypt;
 import com.guiyujin.purenote_mvp.R;
 import com.guiyujin.purenote_mvp.Util;
-import com.guiyujin.purenote_mvp.base.BaseActivity;
+import com.guiyujin.purenote_mvp.base.mvp.BaseMVPActivity;
 import com.guiyujin.purenote_mvp.model.addcontent.AddContentConstract;
 import com.guiyujin.purenote_mvp.model.addcontent.AddContentModelImpl;
 import com.guiyujin.purenote_mvp.model.addcontent.AddcontentPresenter;
@@ -31,7 +31,7 @@ import java.security.GeneralSecurityException;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddContentModelImpl> implements AddContentConstract.View {
+public class AddContentActivity extends BaseMVPActivity<AddcontentPresenter, AddContentModelImpl> implements AddContentConstract.View {
     private EditText et_detail_text, et_detail_title;
     private String text_title, text_content;
 
@@ -40,6 +40,11 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddCon
         super.onCreate(savedInstanceState);
 
         presenter.attach(this, model);
+    }
+
+    @Override
+    protected void initParams(Bundle params) {
+
     }
 
     @Override
@@ -52,10 +57,6 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddCon
         return new AddContentModelImpl();
     }
 
-    @Override
-    public void initParms(Bundle parms) {
-
-    }
 
     @Override
     public View bindView() {
@@ -81,20 +82,26 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddCon
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public void widgetClick(int id) {
         switch (id){
             case R.id.action_save:
                 text_title = et_detail_title.getText().toString();
                 text_content = et_detail_text.getText().toString();
+                String encryptText = null;
+                try {
+                    encryptText = AESCrypt.encrypt("mypassword", text_content);
+                } catch (GeneralSecurityException e) {
+                    e.printStackTrace();
+                }
                 if (text_title.equals("")){
                     showToast("请输入标题");
                 }else {
-                    Note note = null;
-                    try {
-                        note = new Note(text_title, AESCrypt.encrypt("mypassword", text_content), Util.getTime());
-                    } catch (GeneralSecurityException e) {
-                        e.printStackTrace();
-                    }
+                    Note note = new Note(text_title, encryptText, Util.getTime());
                     presenter.save(note,this);
                     finish();
                 }
@@ -108,11 +115,6 @@ public class AddContentActivity extends BaseActivity<AddcontentPresenter, AddCon
 
     @Override
     public void doBusiness(Context mContext) {
-
-    }
-
-    @Override
-    public void checkPermission() {
 
     }
 
