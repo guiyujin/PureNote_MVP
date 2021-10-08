@@ -7,20 +7,12 @@
     android:orientation="vertical"
     tools:context=".activity.DetailActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.Detail">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_detail"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/MainToolbarPopupTheme"
-
-             />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/MainToolbarPopupTheme"
+        />
 
     <EditText
         android:id="@+id/d_title"

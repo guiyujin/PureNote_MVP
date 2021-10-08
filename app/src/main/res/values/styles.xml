@@ -27,7 +27,7 @@
 
     <style name="MainOverflowButtonStyle" >
         <item name="android:src">@drawable/ic_more</item>
-        <item name="android:paddingRight">25dp</item>   //overflow图标右边距
+        <item name="android:paddingRight">10dp</item>   //overflow图标右边距
     </style>
 
     <style name="MainOverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
@@ -50,7 +50,7 @@
 
     <style name="AddOverflowButtonStyle" >
         <item name="android:src">@drawable/ic_confirm</item> //设置overflow图标
-        <item name="android:paddingEnd">15dp</item>  //overflow图标右边距
+        <item name="android:paddingEnd">10dp</item>  //overflow图标右边距
     </style>
 
     <style name="AppTheme.Detail" parent="AppTheme.Base">
@@ -60,7 +60,7 @@
 
     <style name="DetailOverflowButtonStyle" >
         <item name="android:src">@drawable/ic_more</item> //设置overflow图标
-        <item name="android:paddingEnd">15dp</item>  //overflow图标右边距
+        <item name="android:paddingEnd">10dp</item>  //overflow图标右边距
     </style>
 
     <style name="MainToolbarPopupTheme" parent="Widget.AppCompat.PopupMenu.Overflow">

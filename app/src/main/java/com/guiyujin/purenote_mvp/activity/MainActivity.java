@@ -33,7 +33,8 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
     private RecyclerView recyclerView;
     private SearchView mSearchView;
     private boolean isSearch = false;
-    private List<Note> note;
+    private List<Note> notes;
+    private List<Note> resultNotes;
     private boolean isMenuOpen = true;
 
     @Override
@@ -42,7 +43,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
 
 //        note = dBengine.getAllNotes();
         presenter.attach(this,model);
-        Log.i("ONRESULTSSSS", "ONCREATE " + myAdapter.getItemCount());
+//        Log.i("ONRESULTSSSS", "ONCREATE " + myAdapter.getItemCount());
     }
 
     @Override
@@ -78,6 +79,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
         mSearchView = find(R.id.search_view);
 
         dBengine = new DBengine(this);
+        notes = dBengine.getAllNotes();
         myAdapter = new MyAdapter();
 
 
@@ -106,8 +108,9 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
 
                 @Override
                 public void delete() {
+                    Log.i("ONRESULTSSSS", "ONLONGCLICK " + notes.size());
                     Note note = new Note(dBengine.getAllNotes().get(position).getTitle(),
-                            dBengine.getAllNotes().get(position).getContent(), Util.getTime());
+                            dBengine.getAllNotes().get(position).getContent(), dBengine.getAllNotes().get(position).getTime());
                     note.setId(dBengine.getAllNotes().get(position).getId());
                     presenter.delete(note,MainActivity.this);
                 }
@@ -150,13 +153,13 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.i("ONRESULTSSSS", "ONSTART " + notes.size());
         if (!isSearch){
             myAdapter.setAllNotes(dBengine.getAllNotes());
-            recyclerView.setAdapter(myAdapter);
         }else {
-            myAdapter.setAllNotes(note);
-            recyclerView.setAdapter(myAdapter);
+            myAdapter.setAllNotes(resultNotes);
         }
+        recyclerView.setAdapter(myAdapter);
 
     }
 
@@ -198,14 +201,15 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
     }
 
     @Override
-    public void onSearchSuccess(List<Note> note) {
-        this.note = note;
-        myAdapter.setAllNotes(note);
+    public void onSearchSuccess(List<Note> resultNotes) {
+        Log.i("ONRESULTSSSS", "ONSEARCH " + resultNotes.size());
+        myAdapter.setAllNotes(resultNotes);
         recyclerView.setAdapter(myAdapter);
     }
 
     @Override
     public void onDelete() {
+        Log.i("ONRESULTSSSS", "ONDELETE " + notes.size());
         myAdapter.setAllNotes(dBengine.getAllNotes());
         recyclerView.setAdapter(myAdapter);
     }

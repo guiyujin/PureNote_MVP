@@ -7,18 +7,11 @@
     android:orientation="vertical"
     tools:context=".activity.AddContentActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_add"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.Add">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_add"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/add_content" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/add_content" />
 
     <EditText
         android:id="@+id/et_title"
