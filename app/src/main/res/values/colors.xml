@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFCC00</color>
-    <color name="colorPrimaryDark">#FFCC00</color>
+    <color name="colorPrimary">#F7F7F7</color>
+    <color name="colorPrimaryDark">#F7F7F7</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="windowBackground">#fafafa</color>
 
     <color name="set">#00CCFF</color>
 
@@ -23,6 +24,8 @@
 
     <color name="checked">#E6F2FF</color>
     <color name="Primary">#FFFFFF</color>
+
+    <color name="textColor">#FF000000</color>
 
     <color name="MiColorPrimary">#F7F7F7</color>
     <color name="MiColorPrimaryDark">#F7F7F7</color>

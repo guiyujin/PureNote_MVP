@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.guiyujin.purenote_mvp.skinloader.base.SkinBaseApplication;
+import com.guiyujin.purenote_mvp.skinloader.load.SkinManager;
+
 /**
  * @ProjectName: PureNote_MVP
  * @Package: com.guiyujin.purenote_mvp
@@ -16,12 +19,14 @@ import android.util.Log;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public class MyApplication extends Application {
+public class MyApplication extends SkinBaseApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        SkinManager.getInstance().init(this);
+        SkinManager.getInstance().load();
         Log.i("ONRESULTSSSS", "ONAAACREATE " );
     }
 }

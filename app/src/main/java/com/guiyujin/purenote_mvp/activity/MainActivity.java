@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guiyujin.purenote_mvp.MyAdapter;
@@ -36,6 +38,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
     private List<Note> notes;
     private List<Note> resultNotes;
     private boolean isMenuOpen = true;
+    private ScaleAnimation scaleAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,10 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
 
     @Override
     protected void initParams(Bundle params) {
-
+        float toX = (float) 0.95;
+        float toY = (float) 0.95;
+        scaleAnimation = new ScaleAnimation(1, toX, 1, toY,
+                Animation.RELATIVE_TO_SELF, 0.75f,1, 0.75f);
     }
 
     @Override
@@ -98,23 +104,41 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
         });
 
         myAdapter.setOnItemLongClickListener((v, position) -> {
-            OperationDialog operationDialog = new OperationDialog(this);
-            operationDialog.showDialog(R.layout.operation_dialog_center, Gravity.CENTER);
-            operationDialog.setOperationDialogListener(new OperationDialog.OperationDialogListener() {
+            scaleAnimation.setDuration(500);
+            scaleAnimation.setFillBefore(false);
+            scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void edit() {
-                    MainActivity.this.edit(position);
+                public void onAnimationStart(Animation animation) {
+
                 }
 
                 @Override
-                public void delete() {
-                    Log.i("ONRESULTSSSS", "ONLONGCLICK " + notes.size());
-                    Note note = new Note(dBengine.getAllNotes().get(position).getTitle(),
-                            dBengine.getAllNotes().get(position).getContent(), dBengine.getAllNotes().get(position).getTime());
-                    note.setId(dBengine.getAllNotes().get(position).getId());
-                    presenter.delete(note,MainActivity.this);
+                public void onAnimationEnd(Animation animation) {
+                    OperationDialog operationDialog = new OperationDialog(MainActivity.this);
+                    operationDialog.showDialog(R.layout.operation_dialog_center, Gravity.CENTER);
+                    operationDialog.setOperationDialogListener(new OperationDialog.OperationDialogListener() {
+                        @Override
+                        public void edit() {
+                            MainActivity.this.edit(position);
+                        }
+
+                        @Override
+                        public void delete() {
+                            Note note = new Note(dBengine.getAllNotes().get(position).getTitle(),
+                                    dBengine.getAllNotes().get(position).getContent(), dBengine.getAllNotes().get(position).getTime());
+                            note.setId(dBengine.getAllNotes().get(position).getId());
+                            presenter.delete(note,MainActivity.this);
+                        }
+                    });
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
                 }
             });
+            v.startAnimation(scaleAnimation);
+
         });
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -202,6 +226,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter, MainModelImpl> 
 
     @Override
     public void onSearchSuccess(List<Note> resultNotes) {
+        this.resultNotes = resultNotes;
         Log.i("ONRESULTSSSS", "ONSEARCH " + resultNotes.size());
         myAdapter.setAllNotes(resultNotes);
         recyclerView.setAdapter(myAdapter);

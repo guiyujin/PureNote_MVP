@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.guiyujin.purenote_mvp.skinloader.base.SkinBaseActivity;
+
 import java.lang.reflect.Method;
 
 /**
@@ -30,7 +32,7 @@ import java.lang.reflect.Method;
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract class BaseActivity extends SkinBaseActivity implements View.OnClickListener{
     /** 当前Activity渲染的视图View **/
     private View mContextView = null;
     /** 当前Activity的ToolBar **/
