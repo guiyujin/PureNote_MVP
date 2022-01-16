@@ -7,23 +7,6 @@ if ( rootProject.ext.android.is_app){
 
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('E:\\others\\key\\mykey.jks')
-            storePassword 'lovenlee3978'
-            keyAlias 'mykey'
-            keyPassword 'lovenlee3978'
-        }
-    }
-
-//    signingConfigs {
-//        config {
-//            keyAlias 'mykey'
-//            keyPassword 'lovenlee3978'
-//            storeFile file('E:\\others\\key\\mykey.jks')
-//            storePassword 'lovenlee3978'
-//        }
-//    }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
